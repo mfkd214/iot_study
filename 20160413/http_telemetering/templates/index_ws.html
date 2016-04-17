@@ -1,0 +1,22 @@
+<!--
+index_ws.html
+
+2016.03.20  1.0     mfkd    新規作成
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <title></title>
+    <script language="javascript">
+        var ws = new WebSocket("ws://localhost:8888/lm35dz/ws/");
+        ws.onopen = function() {
+            ws.send("Hello, world"); 
+        };
+        ws.onmessage = function (evt) {
+	        document.write("<strong>" + evt.data + "</strong><br />");
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
