@@ -1,0 +1,65 @@
+前準備
+================================================================================
+HC06とラズパイをつなげる
+
+http://blog.miguelgrinberg.com/post/a-cheap-bluetooth-serial-port-for-your-raspberry-pi 
+の「Wiring」のあたり
+
+注意点は
+
+ラズパイ.TXD→HC06.RXD
+ラズパイ.RXD→HC06.TXD
+
+だってこと。
+
+次にシリアル通信がらみ。
+
+今回の方法はシリアル通信を使う。デフォルトのままだとラズパイ側でシリアルコンソールを
+立ち上げにいくようなので、それを止める。
+※Debian（Rasbian)の起動制御がjessieとwheezyで変わったので止め方が変わります。
+
+jessie
+    systemd制御になったのでコマンドで止める
+    $ sudo systemctl stop serial-getty@ttyAMA0.service
+    
+    永続的に止めたきゃこっちコマンドで止める
+    $ sudo systemctl disable serial-getty@ttyAMA0.service
+
+wheezy
+    昔ながらのSysV制御なので、/etc/inittabを弄る
+
+    HC06とラズパイをつなげるで載せたURLの下のほう
+    「Direct serial port access」のあたりを参考に/etc/inittabでttyAMA0を止める。
+　　　　※うちにはwheezyがないのでやってない。    
+
+で、再起動
+
+
+接続と実行
+================================================================================
+
+ペアリング
+BluetoothマネージャみたいなやつでHC06をペアリング(キーは1234）
+
+接続
+MacやLinuxはScreenコマンド
+
+Macだと/devの下のそれっぽいやつ
+Ubuntuだと /dev/rfcomm0 ※ペアリングした時にでるSerial　Port
+
+$ screen /dev/rfcomm0
+
+真っ黒画面で、うんでもなければすんでもないけどほっとく。
+
+ラズパイ側のプログラム実行。
+
+キーボードの1や2を押し続ければ、サーボがまわる。
+
+
+その他
+================================================================================
+
+screenコマンドあれこれ
+http://dotnsf.blog.jp/archives/1003331169.html
+
+
