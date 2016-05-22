@@ -1,0 +1,22 @@
+#-------------------------------------------------------------------------------
+# mjpg-streamer インストール
+#-------------------------------------------------------------------------------
+https://www.raspberrypi.org/forums/viewtopic.php?p=964326#p964326
+
+※　-f　を指定すると映らない 
+
+sudo apt-get update
+sudo apt-get install build-essential libjpeg8-dev imagemagick libv4l-dev git cmake uvcdynctrl -y
+sudo ln -s /usr/include/linux/videodev2.h /usr/include/linux/videodev.h
+git clone https://github.com/jacksonliam/mjpg-streamer.git
+cd mjpg-streamer/mjpg-streamer-experimental/
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo cp -R ~/mjpg-streamer/mjpg-streamer-experimental/www /usr/local/www
+sudo nano /etc/init.d/mjpg_streamkick.sh
+sudo chmod 755 /etc/init.d/mjpg_streamkick.sh
+sudo nano /etc/rc.local
+#Add this to before EXIT /etc/init.d/mjpg_streamkick.sh start

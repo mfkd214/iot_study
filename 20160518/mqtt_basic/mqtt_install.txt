@@ -1,0 +1,9 @@
+・インストール
+http://qiita.com/s_edward/items/cbddd6ee1965cba1770b
+
+・ブローカー
+$ sudo apt-get install mosquitto
+
+・Publisher/Subscriber
+$ sudo apt-get install mosquitto-client
+$ sudo pip install paho-mqtt
